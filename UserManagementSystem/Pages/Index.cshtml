@@ -1,0 +1,56 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    @*<h1 class="display-4">Welcome</h1>
+        <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+</div>
+
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Surname</th>
+            <th scope="col">SA ID</th>
+            <th scope="col">Cell Number</th>
+            <th scope="col">House number</th>
+            <th scope="col">ComplexName</th>
+            <th scope="col">Address</th>
+            <th scope="col">PostalCode</th>
+        </tr>
+    </thead>
+    @if (Model.User != null)
+    {
+        @foreach (var _user in Model.User)
+        {
+            <tr>
+                <td>@_user.FirstName</td>
+                <td>@_user.Surname</td>
+                <td>@_user.SaIdNumber</td>
+                <td>@_user.CellNumber</td>
+                <td>@_user.HouseNumber</td>
+                <td>@_user.ComplexName</td>
+                <td>@_user.Address</td>
+                <td>@_user.PostalCode</td>
+                <td>
+                    <span class="btn btn-success">
+                        <a asp-page="Edit" asp-route-id="@_user.Id">View</a>
+                    </span>
+                </td>
+
+                <td>
+                    <form method="post" asp-page-handler="Delete" asp-route-id="@_user.Id">
+                        <button class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    }
+
+</table>
